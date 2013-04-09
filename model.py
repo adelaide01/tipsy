@@ -30,7 +30,7 @@ def get_user(db, user_id):
     c = db.cursor()
     query = """SELECT * FROM Users WHERE user_id = ?"""
     c.execute(query, (user_id,))
-    result = c.fetchone()
+    result = c.fetchall()
     if result:
         fields = ["user_id", "email", "password", "user_name"]
         return dict(zip(fields, result))
@@ -56,12 +56,12 @@ def complete_task(db, task_id):
 
 def get_task(db, task_id):
     """Gets a single task, given its id. Returns a dictionary of the task data."""
+    fields = ["task_id", "title", "created_at", "completed_at", "task_user_id"]
     c = db.cursor()
     query = """SELECT * FROM Tasks WHERE task_id = ?"""
     c.execute(query, (task_id,))
     result = c.fetchone()
     if result:
-        fields = ["task_id", "title", "created_at", "completed_at", "task_user_id"]
         return dict(zip(fields, result))
     return result.lastrowid 
     

@@ -1,13 +1,28 @@
 <html>
     <head>
     	<title>Tipsy</title>
+        <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
     </head>
     <body>
-        <h1>Task List</h1>
-    	<ul>
+        <h1> Create a task </h1>
+        <form method = "POST" action="/save_task"> <!-- posts or stores raw_input into database, then redirects the action to /save_task -->
+            <input type = "text" name = "title"></input>
+            <input type = "submit">
+        </form>
+
+
+        <h1>Task list</h1>
+    	<ul id = "task_list">
     	{% for item in tasks %}
-    	<li> Task {{ item['task_id'] }}: {{item['title'] }}</li>
+    	<li> Task {{ item['task_id'] }}: {{item['title'] }}, {{item['completed_at'] }}</li>
     	{% endfor %} 
-    	</ul>
+        </ul>
+
+        <h1> Task complete? Enter task ID #: </h1>
+        <form method = "POST" action="/done_task"> <!-- posts or stores raw_input into database, then redirects the action to /done_task -->
+            <input type = "text" name = "task_complete"></input>
+            <input type = "submit">
+        </form>
+        
     </body>
 </html>
